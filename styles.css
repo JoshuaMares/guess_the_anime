@@ -53,6 +53,75 @@ h1{
 main{
     display: flex;
     flex-direction: column;  
-    gap: 8px;
+    gap: 24px;
     flex: 1;
 }
+
+#enter-guess form{
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    border: 1px solid skyblue;
+}
+
+#enter-guess input{
+    background: transparent;
+    outline: none;
+    padding: 4px 8px;
+    color: white;
+    flex: 1;
+    border: none;
+    font-family: "Bungee", sans-serif;/*find another font*/
+}
+
+::placeholder{
+    color: skyblue;
+    font-family: "Bungee", sans-serif;
+}
+
+#enter-guess button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: skyblue;
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    color: navy;
+    font-family: "Bungee", sans-serif;
+    cursor: pointer;
+}
+
+#enter-guess button:hover{
+    background: #0f172a;
+    color: skyblue;
+}
+
+#guesses{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#guessItem{
+    display: flex;
+}
+
+.guessItem p{
+    flex: 1;
+}
+
+.hints{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+}
+
+/*
+find out how to create hover text instead
+.actions i:hover{
+    color: coral;
+}
+*/
