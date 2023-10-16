@@ -23,7 +23,7 @@ body{
 
 header, main, footer{
     width: 800px;
-    max-width: 100vw;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -33,7 +33,7 @@ header{
     justify-content: space-between;
 }
 
-.github-icon{
+.icon{
     font-size: 2.0rem;
     cursor: pointer;
 }
@@ -125,3 +125,12 @@ find out how to create hover text instead
     color: coral;
 }
 */
+
+footer{
+    display: grid;
+    place-items: center;
+}
+
+footer a{
+    color: inherit;
+}
