@@ -1,9 +1,32 @@
+let currentAnimeJSON;
+let currentAnimeTitleList = [];
+
 async function newGame(){
-    const animeJSON = await getAnimeJSON();
-    renderImage(animeJSON);
+    const topJSON = await getTopAnime();
+    console.log(topJSON)
+    let randomNum = Math.floor(Math.random() * topJSON.length);
+    console.log(randomNum);
+    currentAnimeJSON = topJSON[randomNum];
+    //console.log(animeJSON);
+    //const animeJSON = await getAnimeJSON();
+    renderImage(currentAnimeJSON);
+    getAllTitles(currentAnimeJSON);
 }
 
-//pull image from MAL
+function getAllTitles(animeJSON){
+    currentAnimeTitleList.length = 0;
+    for(let i=0; i < animeJSON.titles.length; i++){
+        currentAnimeTitleList.push(animeJSON.titles[i].title);
+    }
+    console.log(currentAnimeTitleList);
+}
+
+async function getTopAnime(){
+    const temp = await fetch(`https://api.jikan.moe/v4/top/anime`).then(res => res.json());
+    console.log(temp.data.length);
+    return temp.data;
+}
+
 async function getAnimeJSON(){
     const temp = await fetch(`https://api.jikan.moe/v4/anime/52991`).then(res => res.json());
     console.log(temp.data);
@@ -11,7 +34,7 @@ async function getAnimeJSON(){
 }
 
 async function renderImage(animeJSON){
-    let imageLink = animeJSON.data.images.jpg.large_image_url;
+    let imageLink = animeJSON.images.jpg.large_image_url;
 
     const imageContainer = document.getElementById("image");
     //let currImageHTML = imageContainer.innerHTML;
@@ -30,11 +53,16 @@ const guessButton = document.getElementById("submit");
 
 function submitGuess(e){
     e.preventDefault();
-    console.log(guessInput.value);
-    guesses.push(guessInput.value);
-    guessesList.innerHTML = "";
-    renderGuesses();
-    guessInput.value = "";
+    let currentGuess = guessInput.value;
+    if(currentAnimeTitleList.includes(currentGuess)){
+        console.log("Correct Guess!!!");
+    }else{
+        console.log(guessInput.value);
+        guesses.push(guessInput.value);
+        guessesList.innerHTML = "";
+        renderGuesses();
+        guessInput.value = "";
+    }
 }
 guessButton.addEventListener("click", submitGuess);
 

@@ -57,6 +57,10 @@ main{
     flex: 1;
 }
 
+figure{
+    margin: auto;
+}
+
 #enter-guess form{
     position: relative;
     display: flex;
