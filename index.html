@@ -15,17 +15,19 @@
 
 
     <main>
-        <section id="image"></section>
+        <section id="image-container"></section>
         
-        <div class="stage"></div>
+        <section id="field">
+            <section id="stage"></section>
 
-        <section id="enter-guess">
-            <form action="">
-                <input type="text" id="text-input" placeholder="Search...">
-                <button type="input" id="submit">Submit</button>
-            </form>
-        </section>
-        <section id="guesses">
+            <section id="enter-guess">
+                <form action="">
+                    <input type="text" id="text-input" placeholder="Search..." autocomplete="off">
+                    <button type="input" id="submit">Submit</button>
+                </form>
+                <section id="search-results"></section>
+            </section>
+            <section id="guesses"></section>
         </section>
     </main>
 
