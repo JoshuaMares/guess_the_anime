@@ -2,6 +2,8 @@ let currentAnimeJSON;
 let currentAnimeTitlesList = [];
 let allAnimeTitlesList = [];
 
+
+
 async function newGame(){
     const topJSON = await getTopAnime();
     console.log(topJSON);
@@ -88,25 +90,58 @@ function selectInput(listItem){
     searchResultsList.innerHTML = "";
 }
 
+guessButton.addEventListener("click", submitGuess);
+
 function submitGuess(e){
     e.preventDefault();
     let currentGuess = guessInput.value;
     if(currentAnimeTitlesList.includes(currentGuess)){
         console.log("Correct Guess!!!");
-        guesses.length = 0;
+        /*guesses.length = 0;
         guessesList.innerHTML = "";
-        renderGuesses();
+        renderGuesses();*/
+        renderNewGuess(currentGuess, true);
+        renderEndScreen();
         guessInput.value = "";
     }else{
         console.log(guessInput.value);
-        guesses.push(guessInput.value);
+        /*guesses.push(guessInput.value);
         guessesList.innerHTML = "";
-        renderGuesses();
+        renderGuesses();*/
+        renderNewGuess(currentGuess, false);
         guessInput.value = "";
     }
 }
-guessButton.addEventListener("click", submitGuess);
 
+function renderEndScreen(){
+    //hide search bar and add new game button
+    document.getElementById("enter-guess").innerHTML = "";
+    document.getElementById("field").innerHTML += '<button type="button">NextGame</button>';
+}
+
+function renderNewGuess(guess, correctGuessBool){
+    if(correctGuessBool){
+        guessesList.innerHTML += (
+            `<div class="guessItem winningGuess">
+            <a href="${currentAnimeJSON.url}" target="_blank"><p>${guess} <i class="fa-solid fa-up-right-from-square"></i></p></a>
+            </div>`
+        );
+    }else{
+        guessesList.innerHTML += (
+            `<div class="guessItem">
+                <p>${guess}</p>
+                <!--
+                <div class="hints">
+                    <i class="fa-brands fa-github github-icon"></i>
+                    <i class="fa-brands fa-github github-icon"></i>
+                </div>
+                -->
+            </div>`
+        );
+    }
+}
+
+/*
 function renderGuesses(){
     guesses.forEach((guess, i) => {
         let currentHTML = guessesList.innerHTML;
@@ -126,5 +161,7 @@ function renderGuesses(){
         guessesList.innerHTML = amendedHTML;
     });
 }
+*/
+
 
 newGame();
