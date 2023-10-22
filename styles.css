@@ -180,6 +180,25 @@ find out how to create hover text instead
     color: skyblue;
 }
 
+#anime-description-container{
+    text-align: center;
+}
+
+#new-game-button-container{
+    display: flex;
+    justify-content: center;
+}
+
+#new-game-button{
+    background-color: skyblue;
+    border: none;
+    font-family: 'Bungee', sans-serif;
+    color: #0f172a;;
+    border-radius: 5px;
+    padding: 4px 8px;
+    margin-top: 5px;
+}
+
 footer{
     display: grid;
     place-items: center;

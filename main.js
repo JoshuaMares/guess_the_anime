@@ -1,7 +1,12 @@
 let currentAnimeJSON;
 let currentAnimeTitlesList = [];
 let allAnimeTitlesList = [];
+let stage = 0;
+let difficulty = 1;
 
+async function newRound(){
+
+}
 
 
 async function newGame(){
@@ -116,12 +121,17 @@ function submitGuess(e){
 function renderEndScreen(){
     //hide search bar and add new game button
     document.getElementById("enter-guess").innerHTML = "";
-    document.getElementById("field").innerHTML += '<button type="button">NextGame</button>';
+    document.getElementById("field").innerHTML += 
+    `
+    <section id="anime-description-container"><p>${currentAnimeJSON.synopsis}</p></section>
+    <section id="new-game-button-container">
+        <button type="button" id="new-game-button">NextGame</button>
+    </section>`;
 }
 
 function renderNewGuess(guess, correctGuessBool){
     if(correctGuessBool){
-        guessesList.innerHTML += (
+        guessesList.innerHTML = (
             `<div class="guessItem winningGuess">
             <a href="${currentAnimeJSON.url}" target="_blank"><p>${guess} <i class="fa-solid fa-up-right-from-square"></i></p></a>
             </div>`
