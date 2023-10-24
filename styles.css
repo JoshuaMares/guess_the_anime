@@ -38,6 +38,28 @@ header{
     cursor: pointer;
 }
 
+.tooltip{
+    position: relative;
+}
+
+.tooltip:hover::after{
+    content: attr(data-tooltip);
+    background: white;
+    color: #0f172a;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: center;
+
+    position: absolute;
+    top: 100%;
+    margin-top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    font-family: 'bungee';
+}
+
 .github-icon:hover{
     color: #0f172a;
     background-color: white;

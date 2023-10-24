@@ -4,7 +4,8 @@ let currentAnimeTitlesList = [];
 let allAnimeTitlesList = [];
 let stage = 1;
 let difficulty = 0;
-let winCount = 5;
+const winsBeforeDifficultyIncrease = 3;
+let winCount = winsBeforeDifficultyIncrease;
 let currentLeft;
 let currentTop;
 
@@ -28,7 +29,7 @@ function shuffle(array) {
 }
 
 async function newRound(){
-    if(winCount == 5){
+    if(winCount == winsBeforeDifficultyIncrease){
         difficulty++;
         winCount = 0;
         topJSON = shuffle(await getTopAnime());
