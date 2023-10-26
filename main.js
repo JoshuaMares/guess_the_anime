@@ -85,6 +85,36 @@ function renderImage(animeJSON){
     
     //random starting position
     setWindow();
+    renderStageButtons();
+}
+
+function renderStageButtons(){
+    let newHTML = ``;
+    let i = 0;
+    do{
+        newHTML += (`
+            <div class="stage-button">
+                <p>${i+1}</p>
+            </div>
+        `);
+        i++;
+    }while(i < stage);
+    newHTML += (`
+        <div class="stage-button noselect" id="skip-button">
+            <p">Skip</p>
+        </div>
+    `);
+    document.getElementById("stage-buttons").innerHTML = newHTML;
+    document.getElementById("skip-button").addEventListener("click", ()=>{
+        if(stage == 5){
+            renderImage(currentAnimeJSON);
+            renderNewGuess("", "loss");
+            renderEndScreen("loss");
+        }else{
+            stage++;
+            renderImage(currentAnimeJSON);
+        }
+    })
 }
 
 function setWindow(){
@@ -162,7 +192,9 @@ guessButton.addEventListener("click", submitGuess);
 function submitGuess(e){
     e.preventDefault();
     let currentGuess = guessInput.value;
-    if(currentAnimeTitlesList.includes(currentGuess)){
+    if(currentGuess.length == 0){
+        return;
+    }else if(currentAnimeTitlesList.includes(currentGuess)){
         console.log("Correct Guess!!!");
         /*guesses.length = 0;
         guessesList.innerHTML = "";
@@ -205,18 +237,8 @@ function renderEndScreen(outcome){
     document.getElementById("new-game-button").addEventListener("click", ()=> {
         stage = 1;
         enterGuessCSS.display = '';
-        //enterGuessCSS.position = '';
-        //enterGuessCSS.visibility = '';
         document.getElementById("guesses").innerHTML = ``;
         document.getElementById("end-screen").innerHTML = ``;
-        /*document.getElementById("enter-guess").innerHTML = `
-            <form action="">
-                <input type="text" id="text-input" placeholder="Search..." autocomplete="off">
-                <button type="input" id="submit">Submit</button>
-            </form>
-            <section id="search-results"></section>`;
-        guessButton.addEventListener("click", submitGuess);
-        guessInput.onkeyup = liveSearch();*/
         newRound();
     });
 }
